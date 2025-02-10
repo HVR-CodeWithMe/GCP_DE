@@ -1,15 +1,23 @@
 steps:
-  # Step 1: Install dependencies (if necessary)
+  # Step 1: Deploy Cloud Composer (Updated to use a different region)
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['components', 'install', 'composer', 'dataproc']
+    args: ['composer', 'environments', 'update', 'data-fetch-new', '--location', 'us-central1']  # Updated region
 
-  # Step 2: Deploy Cloud Composer
+  # Step 2: Submit DataProc PySpark job (Updated region)
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['composer', 'environments', 'update', 'data-fetch-new', '--location', 'asia-south2']
+    args:
+      - 'dataproc'
+      - 'jobs'
+      - 'submit'
+      - 'py'
+      - '--region'
+      - 'us-central1'  # Updated region
+      - '--cluster'
+      - 'cluster-0897'
+      - '--py-files'
+      - 'gs://temp-data-food/demo1.py,gs://temp-data-food/movie_data.py'
+      - '--'
+      - 'gs://temp-data-food/path/to/your-main-script.py'
 
-  # Step 3: Submit DataProc job
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['dataproc', 'jobs', 'submit', 'py', '--region', 'us-central1', '--cluster', 'cluster-0897', '--py-files', 'gs://temp-data-food/demo1.py,gs://temp-data-food/movie_data.py']
 options:
-  logging: CLOUD_LOGGING_ONLY  # This will send logs to Cloud Logging (you could also use NONE to disable logs)
-
+  logging: CLOUD_LOGGING_ONLY  # Logs will be sent to Cloud Logging

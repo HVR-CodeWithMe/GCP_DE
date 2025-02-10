@@ -1,9 +1,17 @@
 steps:
-  # Step 1: Deploy Cloud Composer (Updated to use a different region)
+  # Step 1: Deploy Cloud Composer with required flags (e.g., node count)
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['composer', 'environments', 'update', 'data-fetch-new', '--location', 'us-central1']  # Updated region
+    args:
+      - 'composer'
+      - 'environments'
+      - 'update'
+      - 'data-fetch-new'
+      - '--location'
+      - 'asia-south2'  # Update this as per your requirement
+      - '--node-count'
+      - '3'  # Example: Update to 3 nodes
 
-  # Step 2: Submit DataProc PySpark job (Updated region)
+  # Step 2: Submit DataProc PySpark job
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'dataproc'
@@ -11,7 +19,7 @@ steps:
       - 'submit'
       - 'py'
       - '--region'
-      - 'us-central1'  # Updated region
+      - 'us-central1'
       - '--cluster'
       - 'cluster-0897'
       - '--py-files'

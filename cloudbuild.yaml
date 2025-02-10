@@ -5,7 +5,6 @@ steps:
       - 'dataproc'
       - 'jobs'
       - 'submit'
-      - 'py'
       - '--region'
       - 'us-central1'
       - '--cluster'

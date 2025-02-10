@@ -7,9 +7,7 @@ steps:
       - 'update'
       - 'data-fetch-new'
       - '--location'
-      - 'asia-south2'  # Update this as per your requirement
-      - '--node-count'
-      - '3'  # Example: Update to 3 nodes
+      - 'asia-south2'  
 
   # Step 2: Submit DataProc PySpark job
   - name: 'gcr.io/cloud-builders/gcloud'

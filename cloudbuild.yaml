@@ -1,0 +1,13 @@
+steps:
+  # Step 1: Install dependencies (if necessary)
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['components', 'install', 'composer', 'dataproc']
+
+  # Step 2: Deploy Cloud Composer
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['composer', 'environments', 'update', 'data-fetch-new', '--location', 'asia-south2']
+
+  # Step 3: Submit DataProc job
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['dataproc', 'jobs', 'submit', 'py', '--region', 'us-central1', '--cluster', 'cluster-0897', '--py-files', 'gs://temp-data-food/demo1.py,gs://temp-data-food/movie_data.py']
+

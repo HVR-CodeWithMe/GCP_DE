@@ -1,14 +1,4 @@
 steps:
-  # Step 1: Deploy Cloud Composer with required flags (e.g., node count)
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'composer'
-      - 'environments'
-      - 'update'
-      - 'data-fetch-new'
-      - '--location'
-      - 'asia-south2'  
-
   # Step 2: Submit DataProc PySpark job
   - name: 'gcr.io/cloud-builders/gcloud'
     args:

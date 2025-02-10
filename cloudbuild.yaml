@@ -10,4 +10,7 @@ steps:
   # Step 3: Submit DataProc job
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['dataproc', 'jobs', 'submit', 'py', '--region', 'us-central1', '--cluster', 'cluster-0897', '--py-files', 'gs://temp-data-food/demo1.py,gs://temp-data-food/movie_data.py']
+options:
+  logging: CLOUD_LOGGING_ONLY  # This will send logs to Cloud Logging (you could also use NONE to disable logs)
+  logs_bucket: gs://my-build-logs-bucket-hvr-github  # Specify the Cloud Storage bucket where the logs will be stored
 
